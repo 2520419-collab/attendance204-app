@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>출석 체크 앱</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json"> <!-- 웹 앱 매니페스트 -->
+</head>
+<body>
+    <div class="container">
+        <h1>출석 체크</h1>
+        <div class="attendance-form">
+            <input type="text" id="studentNumber" placeholder="학번 입력" />
+            <button id="checkInButton">출석 체크</button>
+        </div>
+        <div class="attendance-list">
+            <h2>출석 기록</h2>
+            <table id="attendanceTable">
+                <tr>
+                    <th>학번</th>
+                    <th>이름</th>
+                    <th>출석 날짜</th>
+                    <th>출석 시간</th>
+                    <th>삭제</th>
+                </tr>
+            </table>
+            <button id="clearRecordsButton">모든 기록 초기화</button>
+            <button id="downloadRecordsButton">출석 기록 다운로드</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then((registration) => {
+                    console.log('서비스워커 등록됨: ', registration);
+                }).catch((error) => {
+                    console.log('서비스워커 등록 실패: ', error);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
